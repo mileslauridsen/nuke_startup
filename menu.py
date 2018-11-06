@@ -84,9 +84,9 @@ nuke.knobDefault( 'EXPTool.mode', 'Stops' )
 
 
 ### BEGIN MENU SETUP ###
-## FIN Pipeline Menu
-finMenu = nuke.menu('Nuke').addMenu('FIN')
-finMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
-finMenu.addCommand('Copy Reads', 'copyRead()')
+## Miles Menu
+milesMenu = nuke.menu('Nuke').addMenu('miles')
+milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
+milesMenu.addCommand('Copy Reads', 'copyRead()')
 
 ### END MENU SETUP ###
