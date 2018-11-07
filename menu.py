@@ -17,8 +17,8 @@ except:
 
 
 ### BEGIN DEFINTIONS ###
-### set new item definitions
 def viewer_pipes():
+    '''Turn off all viewer pipes'''
     n = nuke.allNodes()
 
     for i in n:
@@ -37,6 +37,7 @@ def firstFrameEval():
     n['first_frame'].setValue(nuke.frame())
 
 def guiOn():
+    '''Set expression on selected node to disable in GUI'''
     n = nuke.thisNode()
     n['disable'].setExpression("$gui ? 0:1")
 
@@ -58,6 +59,7 @@ def guiSamples(gui=1, samples=16):
             n["samples"].setExpression("$gui ? " + gui + " : " + str(samples))
 
 def guiCheck():
+    '''Check all Nodes for any $gui expressions'''
     for n in nuke.allNodes(recurseGroups=True):
         for knob in n.knobs():
             if n[knob].hasExpression():
@@ -72,6 +74,14 @@ def copyRead():
         if n.Class() == "Read":
             files.append( n["file"].getValue() + ", " + str(int(n["first"].getValue())) + "-" + str(int(n["last"].getValue())))
     clip = QtGui.QClipboard().setText("\n".join(files))
+
+def multiPaste():
+    '''Copy contents of clipboard to every selected node.'''
+    for n in nuke.selectedNodes():
+        nukescripts.misc.clean_selection_recursive()
+        n['selected'].setValue(True)
+        nuke.nodePaste('%clipboard%')
+        n['selected'].setValue(False)
 
 ### END DEFINITIONS ###
 
@@ -88,5 +98,6 @@ nuke.knobDefault( 'EXPTool.mode', 'Stops' )
 milesMenu = nuke.menu('Nuke').addMenu('miles')
 milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
 milesMenu.addCommand('Copy Reads', 'copyRead()')
+milesMenu.addCommand('Multi Paste', 'multiPaste()')
 
 ### END MENU SETUP ###
