@@ -75,6 +75,10 @@ def copyRead():
             files.append( n["file"].getValue() + ", " + str(int(n["first"].getValue())) + "-" + str(int(n["last"].getValue())))
     clip = QtGui.QClipboard().setText("\n".join(files))
 
+def copyNukeFilePath():
+    nkfile = nuke.root().name()
+    QtGui.QClipboard().setText(nkfile)
+
 def multiPaste():
     '''Copy contents of clipboard to every selected node.'''
     for n in nuke.selectedNodes():
@@ -98,6 +102,7 @@ nuke.knobDefault( 'EXPTool.mode', 'Stops' )
 milesMenu = nuke.menu('Nuke').addMenu('miles')
 milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
 milesMenu.addCommand('Copy Reads', 'copyRead()')
+milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
 milesMenu.addCommand('Multi Paste', 'multiPaste()')
 
 ### END MENU SETUP ###
