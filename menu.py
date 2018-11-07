@@ -67,7 +67,7 @@ def guiCheck():
                 if "$gui" in origExpression:
                     print n.name(), knob
 
-def copyRead():
+def copyReadFilePath():
     '''Copy paths in file knobs to clipboard'''
     files = []
     for n in nuke.selectedNodes():
@@ -101,7 +101,7 @@ nuke.knobDefault( 'EXPTool.mode', 'Stops' )
 ## Miles Menu
 milesMenu = nuke.menu('Nuke').addMenu('miles')
 milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
-milesMenu.addCommand('Copy Reads', 'copyRead()')
+milesMenu.addCommand('Copy Read File Path', 'copyReadFilePath()')
 milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
 milesMenu.addCommand('Multi Paste', 'multiPaste()')
 
