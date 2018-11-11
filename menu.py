@@ -87,12 +87,72 @@ def multiPaste():
         nuke.nodePaste('%clipboard%')
         n['selected'].setValue(False)
 
+def curveToolMin(mathtype="min"):
+    '''Provide math functions on the curve of measured min values in CurveTool node.'''
+    for n in nuke.selectedNodes():
+        if n.Class() == "CurveTool":
+            redMin = n['minlumapixvalue'].animations()[0]
+            greenMin = n['minlumapixvalue'].animations()[1]
+            blueMin = n['minlumapixvalue'].animations()[2]
+
+            redList = map(lambda key: key.y, redMin.keys())
+            greenList = map(lambda key: key.y, greenMin.keys())
+            blueList = map(lambda key: key.y, blueMin.keys())
+
+            if mathtype=="min":
+                redMin = min(redList)
+                greenMin = min(greenList)
+                blueMin = min(blueList)
+
+                return (redMin, greenMin, blueMin)
+
+            elif mathtype=="minavg":
+
+                redMinAvg = sum(redList)/len(redList)
+                greenMinAvg = sum(greenList)/len(greenList)
+                blueMinAvg = sum(blueList)/len(blueList)
+
+                return (redMinAvg, greenMinAvg, blueMinAvg)
+
+def curveToolMax(mathtype="max"):
+    '''Provide math functions on the curve of measured max values in CurveTool node.'''
+    for n in nuke.selectedNodes():
+        if n.Class() == "CurveTool":
+            redMax = n['maxlumapixvalue'].animations()[0]
+            greenMax = n['maxlumapixvalue'].animations()[1]
+            blueMax = n['maxlumapixvalue'].animations()[2]
+
+            redList = map(lambda key: key.y, redMax.keys())
+            greenList = map(lambda key: key.y, greenMax.keys())
+            blueList = map(lambda key: key.y, blueMax.keys())
+
+            if mathtype=="max":
+                redMax = max(redList)
+                greenMax = max(greenList)
+                blueMax = max(blueList)
+
+                return (redMax, greenMax, blueMax)
+
+            elif mathtype=="maxavg":
+
+                redMaxAvg = sum(redList)/len(redList)
+                greenMaxAvg = sum(greenList)/len(greenList)
+                blueMaxAvg = sum(blueList)/len(blueList)
+
+                return (redMaxAvg, greenMaxAvg, blueMaxAvg)
+
+
+
 ### END DEFINITIONS ###
 
 
 ### BEGIN DEFAULTS SETUP ###
 nuke.addOnUserCreate(firstFrameEval(), nodeClass='FrameHold')
 nuke.knobDefault( 'EXPTool.mode', 'Stops' )
+nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
+nuke.knobDefault("ContactSheet.colorder", 'LeftRight')
+nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
+nuke.knobDefault("ContactSheet.rows", 'LeftRight')
 
 ### END DEFAULTS SETUP ###
 
