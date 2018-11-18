@@ -59,3 +59,7 @@ curve(TimeWarp1.lookup)
 # useful for determining if sharpening is needed on retimes
 # example with a Timewarp node named Timewarp1
 abs(rint(TimeWarp1.lookup)-TimeWarp1.lookup) > 0.15 ? 1:0
+
+# Using TCL lindex and split to get a specific portion of a file path
+# In this case we split the directory separator "/" and choose the 3rd item in the resulting list
+[ lindex [split [value [topnode].file] / ] 3 ]
