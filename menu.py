@@ -149,10 +149,9 @@ def curveToolMax(mathtype="max"):
 ### BEGIN DEFAULTS SETUP ###
 nuke.addOnUserCreate(firstFrameEval(), nodeClass='FrameHold')
 nuke.knobDefault( 'EXPTool.mode', 'Stops' )
-nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
-nuke.knobDefault("ContactSheet.colorder", 'LeftRight')
-nuke.knobDefault("ContactSheet.roworder", 'TopBottom')
-nuke.knobDefault("ContactSheet.rows", 'LeftRight')
+nuke.knobDefault('ContactSheet.roworder', 'TopBottom')
+nuke.knobDefault('ContactSheet.colorder', 'LeftRight')
+nuke.knobDefault('ContactSheet.center', 'True')
 
 ### END DEFAULTS SETUP ###
 
