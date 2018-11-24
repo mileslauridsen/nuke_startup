@@ -1,0 +1,32 @@
+set cut_paste_input [stack 0]
+version 11.1 v2
+push $cut_paste_input
+Group {
+ name matchColor
+ selected true
+ xpos -47
+ ypos -75
+ addUserKnob {20 matchColor}
+ addUserKnob {41 whitepoint l source T Grade2.whitepoint}
+ addUserKnob {41 white l target T Grade2.white}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -90
+  ypos -48
+ }
+ Grade {
+  whitepoint {1 1 1 0}
+  white {1 1 1 0}
+  name Grade2
+  selected true
+  xpos -90
+  ypos 19
+ }
+ Output {
+  name Output1
+  xpos -90
+  ypos 92
+ }
+end_group
