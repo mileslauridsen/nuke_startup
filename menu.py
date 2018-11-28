@@ -67,6 +67,18 @@ def guiCheck():
                 if "$gui" in origExpression:
                     print n.name(), knob
 
+def readFromWrite():
+    '''Create Read node with values from Write node'''
+    for n in nuke.selectedNodes():
+        file = n['file'].getValue()
+        proxy = n['proxy'].getValue()
+        file_seq = glob.glob(file.replace("%04d", "*"))
+        file_seq.sort()
+        first = file_seq[0].split('.')[1]
+        last = file_seq[-1].split('.')[1]
+        read = nuke.nodes.Read(file=file, proxy=proxy, first=first, last=last)
+        read.setXYpos( n.xpos(), n.ypos() + 100 )
+
 def copyReadFilePath():
     '''Copy paths in file knobs to clipboard'''
     files = []
@@ -160,6 +172,7 @@ nuke.knobDefault('ContactSheet.center', 'True')
 ## Miles Menu
 milesMenu = nuke.menu('Nuke').addMenu('miles')
 milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
+milesMenu.addCommand('Read From Write', 'readFromWrite()', 'alt+r')
 milesMenu.addCommand('Copy Read File Path', 'copyReadFilePath()')
 milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
 milesMenu.addCommand('Multi Paste', 'multiPaste()')
