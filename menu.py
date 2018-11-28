@@ -28,14 +28,6 @@ def viewer_pipes():
             else:
                  i.knob("hide_input").setValue(True)
 
-def curFrame():
-    '''Return value of current frame'''
-    return nuke.frame()
-
-def firstFrameEval():
-    n = nuke.thisNode()
-    n['first_frame'].setValue(nuke.frame())
-
 def guiOn():
     '''Set expression on selected node to disable in GUI'''
     n = nuke.thisNode()
@@ -159,11 +151,35 @@ def curveToolMax(mathtype="max"):
 
 
 ### BEGIN DEFAULTS SETUP ###
-nuke.addOnUserCreate(firstFrameEval(), nodeClass='FrameHold')
-nuke.knobDefault( 'EXPTool.mode', 'Stops' )
+nuke.addOnUserCreate(lambda:nuke.thisNode()['first_frame'].setValue(nuke.frame()), nodeClass='FrameHold')
 nuke.knobDefault('ContactSheet.roworder', 'TopBottom')
 nuke.knobDefault('ContactSheet.colorder', 'LeftRight')
 nuke.knobDefault('ContactSheet.center', 'True')
+nuke.knobDefault('Read.label', 'Frames\n[value first] - [value last]')
+nuke.knobDefault('Copy.bbox', 'A')
+nuke.knobDefault('Remove.operation','keep')
+nuke.knobDefault('Remove.channels','rgba')
+nuke.knobDefault('Multiply.channels','rgba')
+nuke.knobDefault('Invert.channels','rgba')
+nuke.knobDefault('Add.channels','rgb')
+nuke.knobDefault('EXPTool.mode', 'Stops' )
+nuke.knobDefault('Blur.label','[value size]')
+nuke.knobDefault('Blur.channels','rgba')
+nuke.knobDefault('Defocus.channels','rgba')
+nuke.knobDefault('Defocus.label','[value defocus]')
+nuke.knobDefault('Keymix.channels','rgba')
+nuke.knobDefault('Dissolve.channels','rgba')
+
+# RAYRENDER
+nuke.knobDefault('RayRender.AOV_Point','__Pworld')
+nuke.knobDefault('RayRender.AOV_Normal','__Nworld')
+nuke.knobDefault('RayRender.AOV_Motion','__motion')
+nuke.knobDefault('RayRender.AOV_Point','__Pworld')
+nuke.knobDefault('RayRender.AOV_Direct_Diffuse','__direct_diffuse')
+nuke.knobDefault('RayRender.AOV_Direct_Specular','__direct_specular')
+nuke.knobDefault('RayRender.AOV_Reflection','__indirect_specular')
+nuke.knobDefault('RayRender.AOV_Emissive','__incandescance')
+nuke.knobDefault('RayRender.output_shader_vectors','1')
 
 ### END DEFAULTS SETUP ###
 
@@ -175,6 +191,6 @@ milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
 milesMenu.addCommand('Read From Write', 'readFromWrite()', 'alt+r')
 milesMenu.addCommand('Copy Read File Path', 'copyReadFilePath()')
 milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
-milesMenu.addCommand('Multi Paste', 'multiPaste()')
+milesMenu.addCommand('Multi Paste', 'multiPaste()', 'ctrl+shift+v')
 
 ### END MENU SETUP ###
