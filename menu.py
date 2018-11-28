@@ -145,7 +145,22 @@ def curveToolMax(mathtype="max"):
 
                 return (redMaxAvg, greenMaxAvg, blueMaxAvg)
 
-
+def rayRenderChannels():
+    nuke.Layer( '__Pworld', ['x', 'y', 'z'] )
+    nuke.Layer( '__Nworld', ['x', 'y', 'z'] )
+    nuke.Layer( '__motion', ['red', 'green', 'blue'] )
+    nuke.Layer( '__direct_diffuse', ['red', 'green', 'blue'] )
+    nuke.Layer( '__direct_specular', ['red', 'green', 'blue'] )
+    nuke.Layer( '__indirect_specular', ['red', 'green', 'blue'] )
+    nuke.Layer( '__incandescence', ['red', 'green', 'blue'] )
+    n = nuke.thisNode()
+    n['AOV_Point'].setValue('__Pworld')
+    n['AOV_Normal'].setValue('__Nworld')
+    n['AOV_Motion'].setValue('__motion')
+    n['AOV_Direct_Diffuse'].setValue('__direct_diffuse')
+    n['AOV_Direct_Specular'].setValue('__direct_specular')
+    n['AOV_Reflection'].setValue('__indirect_specular')
+    n['AOV_Emissive'].setValue('__incandescence')
 
 ### END DEFINITIONS ###
 
@@ -171,15 +186,8 @@ nuke.knobDefault('Keymix.channels','rgba')
 nuke.knobDefault('Dissolve.channels','rgba')
 
 # RAYRENDER
-nuke.knobDefault('RayRender.AOV_Point','__Pworld')
-nuke.knobDefault('RayRender.AOV_Normal','__Nworld')
-nuke.knobDefault('RayRender.AOV_Motion','__motion')
-nuke.knobDefault('RayRender.AOV_Point','__Pworld')
-nuke.knobDefault('RayRender.AOV_Direct_Diffuse','__direct_diffuse')
-nuke.knobDefault('RayRender.AOV_Direct_Specular','__direct_specular')
-nuke.knobDefault('RayRender.AOV_Reflection','__indirect_specular')
-nuke.knobDefault('RayRender.AOV_Emissive','__incandescance')
-nuke.knobDefault('RayRender.output_shader_vectors','1')
+nuke.knobDefault('RayRender.output_shader_vectors','0')
+nuke.addOnUserCreate(rayRenderChannels, nodeClass="RayRender")
 
 ### END DEFAULTS SETUP ###
 
