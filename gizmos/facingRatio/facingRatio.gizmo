@@ -1,0 +1,89 @@
+set cut_paste_input [stack 0]
+version 11.1 v2
+push 0
+push $cut_paste_input
+add_layer {__world_normals __world_normals.x __world_normals.y __world_normals.z}
+Group {
+ inputs 2
+ name FacingRatio
+ selected true
+ xpos -64
+ ypos 144
+ addUserKnob {20 FacingRatio}
+ addUserKnob {41 in l normals_channel T Shuffle1.in}
+ addUserKnob {41 white l gain T Grade1.white}
+ addUserKnob {41 gamma T Grade1.gamma}
+ addUserKnob {41 disable_1 l invert T Invert1.disable}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {26 dev l "" +STARTLINE T "by mileslauridsen@gmail.com"}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -348
+  ypos -9
+ }
+ Shuffle {
+  in __world_normals
+  name Shuffle1
+  selected true
+  xpos -348
+  ypos 31
+ }
+ ColorMatrix {
+  matrix {
+      {{InputCam.world_matrix.0} {InputCam.world_matrix.4} {InputCam.world_matrix.8}}
+      {{InputCam.world_matrix.1} {InputCam.world_matrix.5} {InputCam.world_matrix.9}}
+      {{InputCam.world_matrix.2} {InputCam.world_matrix.6} {InputCam.world_matrix.10}}
+    }
+  name ColorMatrix1
+  xpos -348
+  ypos 79
+ }
+ Expression {
+  expr0 "r < 0 ? r * -1 : r"
+  expr1 "g < 0 ? g * -1 : g"
+  expr2 "b < 0 ? b * -1 : b"
+  name Expression1
+  xpos -348
+  ypos 128
+ }
+ Invert {
+  channels rgba
+  name Invert1
+  xpos -348
+  ypos 152
+ }
+ Grade {
+  channels rgba
+  white_clamp true
+  name Grade1
+  xpos -348
+  ypos 176
+ }
+ Shuffle {
+  red blue
+  green blue
+  alpha blue
+  name Shuffle2
+  xpos -348
+  ypos 200
+ }
+ Output {
+  name Output1
+  xpos -348
+  ypos 260
+ }
+ Input {
+  inputs 0
+  name cam
+  xpos -208
+  ypos -10
+  number 1
+ }
+ Camera2 {
+  name InputCam
+  xpos -198
+  ypos 58
+ }
+end_group
