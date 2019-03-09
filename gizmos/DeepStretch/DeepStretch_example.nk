@@ -1,14 +1,14 @@
-#! /Applications/Nuke11.1v2/Nuke11.1v2.app/Contents/MacOS/libnuke-11.1.2.dylib -nx
-version 11.1 v2
+#! /Applications/Nuke11.3v2/Nuke11.3v2.app/Contents/MacOS/libnuke-11.3.2.dylib -nx
+version 11.3 v2
 define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
 <layout version="1.0">
-    <window x="0" y="23" w="1440" h="855" screen="0">
+    <window x="4" y="23" w="1436" h="855" screen="0">
         <splitter orientation="1">
             <split size="40"/>
             <dock id="" hideTitles="1" activePageId="Toolbar.1">
                 <page id="Toolbar.1"/>
             </dock>
-            <split size="777" stretch="1"/>
+            <split size="773" stretch="1"/>
             <splitter orientation="2">
                 <split size="488"/>
                 <dock id="" activePageId="Viewer.1">
@@ -19,7 +19,6 @@ define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
                     <page id="DAG.1"/>
                     <page id="Curve Editor.1"/>
                     <page id="DopeSheet.1"/>
-                    <page id="DAG.2"/>
                 </dock>
             </splitter>
             <split size="615"/>
@@ -120,8 +119,10 @@ Group {
  help "A tool to stretch the distance between the front and back samples."
  tile_color 0x966ff
  xpos 165
- ypos -1325
+ ypos -1330
  addUserKnob {20 DeepStretch}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup', new=2)" +STARTLINE}
+ addUserKnob {26 ""}
  addUserKnob {41 stretch_offset T DeepExpression4.stretch_offset}
  addUserKnob {41 midpoint_weight T DeepExpression4.midpoint_weight}
  addUserKnob {41 alpha_mult T DeepExpression4.alpha_mult}
@@ -152,7 +153,7 @@ Group {
   ypos -535
   addUserKnob {20 User}
   addUserKnob {7 stretch_offset t "Maximum offset value to separate the deep.front and deep.back by."}
-  stretch_offset 3
+  stretch_offset 8
   addUserKnob {7 midpoint_weight t "Sets weighting between front and back expansion. 0 would place entire offset on deep.back. 1 would place entire offset on deep.front."}
   midpoint_weight 0.5
   addUserKnob {6 uniform_stretch t "Don't multiply the offset value by the alpha. Performs an even expansion across all pixels." +STARTLINE}
@@ -223,7 +224,7 @@ Cube {
  xpos -405
  ypos -1690
 }
-set Nddb0600 [stack 0]
+set Nb636d420 [stack 0]
 TransformGeo {
  translate {-3 0 -6}
  scaling {1 0.6 1}
@@ -231,7 +232,7 @@ TransformGeo {
  xpos -310
  ypos -1602
 }
-push $Nddb0600
+push $Nb636d420
 TransformGeo {
  translate {-3 0 -10}
  scaling {1.5 1 1}
@@ -239,7 +240,7 @@ TransformGeo {
  xpos -496
  ypos -1599
 }
-push $Nddb0600
+push $Nb636d420
 TransformGeo {
  translate {-3 0 -8}
  scaling {1 0.8 1}
@@ -253,20 +254,20 @@ MergeGeo {
  xpos -405
  ypos -1551
 }
-set Nfdef09d0 [stack 0]
+set Nb1c58e80 [stack 0]
 TransformGeo {
  translate {4 0 0}
  name TransformGeo5
  xpos -188
  ypos -1493
 }
-push $Nfdef09d0
+push $Nb1c58e80
 Dot {
  name Dot2
  xpos -371
  ypos -1467
 }
-push $Nfdef09d0
+push $Nb1c58e80
 TransformGeo {
  translate {2 0 0}
  name TransformGeo4
@@ -325,7 +326,13 @@ DeepMerge {
 }
 DeepToImage {
  name DeepToImage1
- selected true
  xpos 165
  ypos -926
+}
+Viewer {
+ frame 1
+ frame_range 1-100
+ name Viewer1
+ xpos 165
+ ypos -902
 }

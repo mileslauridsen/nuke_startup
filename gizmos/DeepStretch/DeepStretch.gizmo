@@ -1,18 +1,20 @@
 set cut_paste_input [stack 0]
-version 11.1 v2
+version 11.3 v2
 push $cut_paste_input
 Group {
  name DeepStretch
  help "A tool to stretch the distance between the front and back samples."
  tile_color 0x966ff
  selected true
- xpos -105
- ypos -1345
+ xpos 611
+ ypos 369
  addUserKnob {20 DeepStretch}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup', new=2)" +STARTLINE}
+ addUserKnob {26 "" +STARTLINE}
  addUserKnob {41 stretch_offset T DeepExpression4.stretch_offset}
  addUserKnob {41 midpoint_weight T DeepExpression4.midpoint_weight}
- addUserKnob {41 uniform_stretch T DeepExpression4.uniform_stretch}
  addUserKnob {41 alpha_mult T DeepExpression4.alpha_mult}
+ addUserKnob {41 uniform_stretch T DeepExpression4.uniform_stretch}
 }
  Input {
   inputs 0
@@ -39,10 +41,11 @@ Group {
   ypos -535
   addUserKnob {20 User}
   addUserKnob {7 stretch_offset t "Maximum offset value to separate the deep.front and deep.back by."}
-  stretch_offset 4
+  stretch_offset 3
   addUserKnob {7 midpoint_weight t "Sets weighting between front and back expansion. 0 would place entire offset on deep.back. 1 would place entire offset on deep.front."}
   midpoint_weight 0.5
   addUserKnob {6 uniform_stretch t "Don't multiply the offset value by the alpha. Performs an even expansion across all pixels." +STARTLINE}
+  uniform_stretch true
   addUserKnob {7 alpha_offset}
   alpha_offset {{uniform_stretch}}
   addUserKnob {7 alpha_mult t "Mult the alpha by this amount to prevent opaque pixels where the alpha = 1"}
