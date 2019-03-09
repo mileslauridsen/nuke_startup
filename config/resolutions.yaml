@@ -1,0 +1,73 @@
+resolutions:
+      2K_DCP: 
+        name: "2K_DCP"
+        width: 2048
+        height: 1080
+        pixelaspect: 1.0
+        tags: 
+          - delivery
+          - 2K
+      square_1k:
+        name: square_1k
+        width: 1024
+        height: 1024
+        pixelaspect: 1.0
+        tags: 
+          - square
+          - texture
+      square_2k:
+        name: square_2k
+        width: 2048
+        height: 2048
+        pixelaspect: 1.0
+        tags: 
+          - square
+          - texture
+      square_4k:
+        name: square_4k
+        width: 4096
+        height: 4096
+        pixelaspect: 1.0
+        tags: 
+          - square
+          - texture
+      square_8k:
+        name: square_8k
+        width: 8192
+        height: 8192
+        pixelaspect: 1.0
+        tags: 
+          - square
+          - texture
+      latlong_1k:
+        name: latlong_1k
+        width: 1024
+        height: 512
+        pixelaspect: 1.0
+        tags: 
+          - latlong
+          - texture
+      latlong_2k:
+        name: latlong_2k
+        width: 2048
+        height: 1024
+        pixelaspect: 1.0
+        tags: 
+          - latlong
+          - texture
+      latlong_4k:
+        name: latlong_4k
+        width: 4096
+        height: 2048
+        pixelaspect: 1.0
+        tags: 
+          - latlong
+          - texture
+      latlong_8k:
+        name: latlong_8k
+        width: 8192
+        height: 4096
+        pixelaspect: 1.0
+        tags: 
+          - latlong
+          - texture

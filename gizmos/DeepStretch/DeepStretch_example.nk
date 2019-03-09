@@ -1,0 +1,338 @@
+#! /Applications/Nuke11.3v2/Nuke11.3v2.app/Contents/MacOS/libnuke-11.3.2.dylib -nx
+version 11.3 v2
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="4" y="23" w="1436" h="855" screen="0">
+        <splitter orientation="1">
+            <split size="40"/>
+            <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                <page id="Toolbar.1"/>
+            </dock>
+            <split size="773" stretch="1"/>
+            <splitter orientation="2">
+                <split size="488"/>
+                <dock id="" activePageId="Viewer.1">
+                    <page id="Viewer.1"/>
+                </dock>
+                <split size="342"/>
+                <dock id="" activePageId="DAG.1" focus="true">
+                    <page id="DAG.1"/>
+                    <page id="Curve Editor.1"/>
+                    <page id="DopeSheet.1"/>
+                </dock>
+            </splitter>
+            <split size="615"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.scripteditor.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/vectorthirteen/syncthing/production/SYSTEMS/dev/miles_tools/nuke_startup/gizmos/DeepStretch/DeepStretch_example.nk
+ format "1920 1080 0 0 1920 1080 1 HD_1080"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+ colorManagement Nuke
+ workingSpaceLUT linear
+ monitorLut sRGB
+ int8Lut sRGB
+ int16Lut sRGB
+ logLut Cineon
+ floatLut linear
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode3
+ tile_color 0x191919ff
+ label "Deep Stretch Example"
+ note_font_size 42
+ xpos -649
+ ypos -1892
+ bdwidth 1170
+ bdheight 1074
+ z_order -1
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode1
+ tile_color 0x686868ff
+ label DeepStretch
+ note_font_size 42
+ xpos 100
+ ypos -1415
+ bdwidth 223
+ bdheight 159
+ z_order 5
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode2
+ tile_color 0x44446bff
+ label "Demo Geo"
+ note_font_size 42
+ xpos -531
+ ypos -1770
+ bdwidth 506
+ bdheight 869
+ z_order 5
+}
+BackdropNode {
+ inputs 0
+ name BackdropNode4
+ tile_color 0x666666ff
+ label Smoke/Fog
+ note_font_size 42
+ xpos 101
+ ypos -1741
+ bdwidth 216
+ bdheight 188
+ z_order 5
+}
+StickyNote {
+ inputs 0
+ name StickyNote1
+ label "<p><b><< View Here"
+ note_font_size 30
+ xpos 269
+ ypos -939
+}
+Noise {
+ inputs 0
+ center {1024 778}
+ name Noise1
+ xpos 165
+ ypos -1659
+}
+DeepFromImage {
+ set_z true
+ z 10
+ name DeepFromImage1
+ xpos 165
+ ypos -1610
+}
+Group {
+ name DeepStretch
+ help "A tool to stretch the distance between the front and back samples."
+ tile_color 0x966ff
+ xpos 165
+ ypos -1330
+ addUserKnob {20 DeepStretch}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup', new=2)" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 stretch_offset T DeepExpression4.stretch_offset}
+ addUserKnob {41 midpoint_weight T DeepExpression4.midpoint_weight}
+ addUserKnob {41 alpha_mult T DeepExpression4.alpha_mult}
+ addUserKnob {41 uniform_stretch T DeepExpression4.uniform_stretch}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos 527
+  ypos -603
+ }
+ DeepExpression {
+  temp_name0 offset
+  temp_expr0 "\[value stretch_offset]"
+  temp_name1 alphaOffset
+  temp_expr1 "\[value alpha_offset] ? 1 : rgba.alpha"
+  temp_name2 frontVal
+  temp_expr2 "\[value midpoint_weight]"
+  temp_name3 backVal
+  temp_expr3 "1 - \[value midpoint_weight]"
+  chans1 deep
+  rgba.alpha "rgba.alpha * \[value alpha_mult]"
+  deep.front "deep.front - ((offset * frontVal) * alphaOffset)"
+  deep.back "deep.back + ((offset * backVal) * alphaOffset)"
+  name DeepExpression4
+  selected true
+  xpos 527
+  ypos -535
+  addUserKnob {20 User}
+  addUserKnob {7 stretch_offset t "Maximum offset value to separate the deep.front and deep.back by."}
+  stretch_offset 8
+  addUserKnob {7 midpoint_weight t "Sets weighting between front and back expansion. 0 would place entire offset on deep.back. 1 would place entire offset on deep.front."}
+  midpoint_weight 0.5
+  addUserKnob {6 uniform_stretch t "Don't multiply the offset value by the alpha. Performs an even expansion across all pixels." +STARTLINE}
+  uniform_stretch true
+  addUserKnob {7 alpha_offset}
+  alpha_offset {{uniform_stretch}}
+  addUserKnob {7 alpha_mult t "Mult the alpha by this amount to prevent opaque pixels where the alpha = 1"}
+  alpha_mult 0.999
+ }
+ Output {
+  name Output1
+  xpos 527
+  ypos -463
+ }
+end_group
+DeepTransform {
+ translate {0 0 9}
+ name DeepTransform3
+ xpos 165
+ ypos -1196
+}
+Camera2 {
+ inputs 0
+ translate {0 2 10}
+ rotate {0 3 0}
+ focal 35
+ name Camera1
+ xpos -416
+ ypos -1152
+}
+Constant {
+ inputs 0
+ color {0 0 0 1}
+ name Constant1
+ xpos -174
+ ypos -1329
+}
+Wireframe {
+ operation over
+ line_color 0.18
+ name Wireframe1
+ xpos -174
+ ypos -1250
+}
+Card2 {
+ inputs 0
+ rotate {90 0 0}
+ uniform_scale 50
+ control_points {3 3 3 6 
+
+1 {-0.5 -0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0 0 0} 
+1 {0 -0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {0.5 0 0} 
+1 {0.5 -0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666865 0} 0 {0 0 0} 0 {1 0 0} 
+1 {-0.5 0 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0 0.5 0} 
+1 {0 0 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {0.5 0.5 0} 
+1 {0.5 0 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0.1666666716 0} 0 {0 -0.1666666716 0} 0 {1 0.5 0} 
+1 {-0.5 0.5 0} 0 {0.1666666865 0 0} 0 {0 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0 1 0} 
+1 {0 0.5 0} 0 {0.1666666716 0 0} 0 {-0.1666666716 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {0.5 1 0} 
+1 {0.5 0.5 0} 0 {0 0 0} 0 {-0.1666666865 0 0} 0 {0 0 0} 0 {0 -0.1666666865 0} 0 {1 1 0} }
+ name Card1
+ xpos -460
+ ypos -1413
+}
+Cube {
+ inputs 0
+ cube {-0.5 0 -0.5 0.5 5 0.5}
+ name Cube1
+ xpos -405
+ ypos -1690
+}
+set Nb636d420 [stack 0]
+TransformGeo {
+ translate {-3 0 -6}
+ scaling {1 0.6 1}
+ name TransformGeo3
+ xpos -310
+ ypos -1602
+}
+push $Nb636d420
+TransformGeo {
+ translate {-3 0 -10}
+ scaling {1.5 1 1}
+ name TransformGeo1
+ xpos -496
+ ypos -1599
+}
+push $Nb636d420
+TransformGeo {
+ translate {-3 0 -8}
+ scaling {1 0.8 1}
+ name TransformGeo2
+ xpos -405
+ ypos -1600
+}
+MergeGeo {
+ inputs 3
+ name MergeGeo1
+ xpos -405
+ ypos -1551
+}
+set Nb1c58e80 [stack 0]
+TransformGeo {
+ translate {4 0 0}
+ name TransformGeo5
+ xpos -188
+ ypos -1493
+}
+push $Nb1c58e80
+Dot {
+ name Dot2
+ xpos -371
+ ypos -1467
+}
+push $Nb1c58e80
+TransformGeo {
+ translate {2 0 0}
+ name TransformGeo4
+ xpos -299
+ ypos -1489
+}
+MergeGeo {
+ inputs 4
+ name MergeGeo2
+ xpos -299
+ ypos -1413
+}
+TransformGeo {
+ rotate {0 25 0}
+ pivot {-1 0 -8}
+ name TransformGeo6
+ xpos -299
+ ypos -1346
+}
+ApplyMaterial {
+ inputs 2
+ name ApplyMaterial1
+ xpos -299
+ ypos -1250
+}
+Reformat {
+ inputs 0
+ name Reformat1
+ xpos -174
+ ypos -1155
+}
+Crop {
+ box {0 0 2048 1556}
+ name Crop1
+ xpos -174
+ ypos -1131
+}
+ScanlineRender {
+ inputs 3
+ conservative_shader_sampling false
+ motion_vectors_type distance
+ name ScanlineRender1
+ xpos -299
+ ypos -1131
+}
+Dot {
+ name Dot1
+ xpos -265
+ ypos -1006
+}
+DeepMerge {
+ inputs 2
+ name DeepMerge1
+ xpos 165
+ ypos -1009
+}
+DeepToImage {
+ name DeepToImage1
+ xpos 165
+ ypos -926
+}
+Viewer {
+ frame 1
+ frame_range 1-100
+ name Viewer1
+ xpos 165
+ ypos -902
+}
