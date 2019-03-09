@@ -1,0 +1,72 @@
+set cut_paste_input [stack 0]
+version 11.3 v2
+push $cut_paste_input
+Group {
+ name udimExtract
+ selected true
+ xpos 82
+ ypos 360
+ addUserKnob {20 udimExtract}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup')" +STARTLINE}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {41 udim T udimCTRL.udim}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+ addUserKnob {41 filter T ScanlineRender1.filter}
+}
+ Input {
+  inputs 0
+  name geo
+  xpos -543
+  ypos 14
+ }
+ Reformat {
+  inputs 0
+  format "2048 2048 0 0 2048 2048 1 square_2K"
+  name Reformat1
+  xpos -712
+  ypos 164
+ }
+ ScanlineRender {
+  inputs 2
+  conservative_shader_sampling false
+  filter Impulse
+  projection_mode uv
+  overscan {{"udimCTRL.uvSize.w * \[lindex \[split \[value udimCTRL.udim] \"\" ] 3]"} {"udimCTRL.uvSize.h * \[lindex \[split \[value udimCTRL.udim] \"\" ] 2] + udimCTRL.uvSize.h"}}
+  motion_vectors_type distance
+  output_shader_vectors true
+  P_channel __position
+  N_channel __world_normals
+  name ScanlineRender1
+  xpos -543
+  ypos 168
+ }
+ Crop {
+  box {{"udimCTRL.uvSize.w * \[lindex \[split \[value udimCTRL.udim] \"\" ] 3] - udimCTRL.uvSize"} {"udimCTRL.uvSize.h * \[lindex \[split \[value udimCTRL.udim] \"\" ] 2]"} {"udimCTRL.uvSize.w * \[lindex \[split \[value udimCTRL.udim] \"\" ] 3]"} {"udimCTRL.uvSize.h * \[lindex \[split \[value udimCTRL.udim] \"\" ] 2] + udimCTRL.uvSize.h"}}
+  reformat true
+  crop false
+  name Crop1
+  xpos -543
+  ypos 265
+ }
+ Output {
+  name Output1
+  xpos -543
+  ypos 385
+ }
+ Output {
+  name Output1
+  xpos -543
+  ypos 485
+ }
+ NoOp {
+  inputs 0
+  name udimCTRL
+  xpos -711
+  ypos 265
+  addUserKnob {20 User}
+  addUserKnob {14 uvSize R 0 100}
+  uvSize {{"\[lindex \[split \[value Reformat1.format] ] 0]"} {"\[lindex \[split \[value Reformat1.format] ] 1]"}}
+  addUserKnob {3 udim}
+  udim 1001
+ }
+end_group
