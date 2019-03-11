@@ -1,0 +1,358 @@
+set cut_paste_input [stack 0]
+version 11.3 v2
+push 0
+push 0
+push $cut_paste_input
+Group {
+ inputs 3
+ name CubeCam
+ selected true
+ xpos 605
+ ypos -302
+ addUserKnob {20 CubeCam}
+ addUserKnob {41 format l "output format" T Reformat1.format}
+}
+ Reformat {
+  inputs 0
+  format "2048 2048 0 0 2048 2048 1 square_2K"
+  name Reformat1
+  xpos -346
+  ypos -150
+ }
+ Input {
+  inputs 0
+  name cam_pos
+  xpos -65
+  ypos -430
+ }
+ Axis2 {
+  name Axis1
+  xpos -55
+  ypos -296
+ }
+ Dot {
+  name Dot1
+  xpos -31
+  ypos -117
+ }
+set Nb5c81900 [stack 0]
+ Dot {
+  name Dot2
+  xpos 252
+  ypos -117
+ }
+set Nb5c83dc0 [stack 0]
+ Dot {
+  name Dot3
+  xpos 528
+  ypos -117
+ }
+set Nb5c86280 [stack 0]
+ Dot {
+  name Dot4
+  xpos 791
+  ypos -117
+ }
+set Nb5c88740 [stack 0]
+ Dot {
+  name Dot5
+  xpos 1074
+  ypos -117
+ }
+set Nb5c8ac00 [stack 0]
+ Dot {
+  name Dot6
+  xpos 1339
+  ypos -117
+ }
+ Camera2 {
+  rotate {-90 0 0}
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera6
+  label "rotate = \[value rotate]"
+  xpos 1315
+  ypos -5
+ }
+ Input {
+  inputs 0
+  name latlong
+  xpos -209
+  ypos -431
+  number 1
+ }
+ Dot {
+  name Dot7
+  xpos -175
+  ypos -70
+ }
+set Nb5c3c7e0 [stack 0]
+ Dot {
+  name Dot8
+  xpos 108
+  ypos -70
+ }
+set Nb5c3eca0 [stack 0]
+ Dot {
+  name Dot11
+  xpos 384
+  ypos -70
+ }
+set Nb5c41160 [stack 0]
+ Dot {
+  name Dot13
+  xpos 647
+  ypos -70
+ }
+set Nb5c43620 [stack 0]
+ Dot {
+  name Dot15
+  xpos 930
+  ypos -70
+ }
+set Nb5c45ae0 [stack 0]
+ Dot {
+  name Dot17
+  xpos 1195
+  ypos -70
+ }
+ SphericalTransform {
+  input "Lat Long map"
+  rx -90
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform6
+  xpos 1161
+  ypos 12
+ }
+ Dot {
+  name Dot18
+  xpos 1195
+  ypos 125
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D6
+  xpos 1305
+  ypos 122
+ }
+push $Nb5c8ac00
+ Camera2 {
+  rotate {90 0 0}
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera5
+  label "rotate = \[value rotate]"
+  xpos 1050
+  ypos -3
+ }
+push $Nb5c45ae0
+ SphericalTransform {
+  input "Lat Long map"
+  rx 90
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform5
+  selected true
+  xpos 896
+  ypos 12
+ }
+ Dot {
+  name Dot16
+  xpos 930
+  ypos 125
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D5
+  xpos 1040
+  ypos 122
+ }
+push $Nb5c88740
+ Camera2 {
+  rotate {0 180 0}
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera4
+  label "rotate = \[value rotate]"
+  xpos 767
+  ypos -3
+ }
+push $Nb5c43620
+ SphericalTransform {
+  input "Lat Long map"
+  ry 180
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform4
+  xpos 613
+  ypos 12
+ }
+ Dot {
+  name Dot14
+  xpos 647
+  ypos 125
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D4
+  xpos 757
+  ypos 122
+ }
+push $Nb5c86280
+ Camera2 {
+  rotate {0 90 0}
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera3
+  label "rotate = \[value rotate]"
+  xpos 504
+  ypos -3
+ }
+push $Nb5c41160
+ SphericalTransform {
+  input "Lat Long map"
+  ry 90
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform3
+  xpos 350
+  ypos 12
+ }
+ Dot {
+  name Dot12
+  xpos 384
+  ypos 125
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D3
+  xpos 494
+  ypos 122
+ }
+push $Nb5c81900
+ Camera2 {
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera1
+  label "rotate = \[value rotate]"
+  xpos -55
+  ypos -6
+ }
+push $Nb5c3c7e0
+ SphericalTransform {
+  input "Lat Long map"
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform1
+  xpos -209
+  ypos 9
+ }
+ Dot {
+  name Dot9
+  xpos -175
+  ypos 126
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D1
+  xpos -65
+  ypos 123
+ }
+ Dot {
+  name Dot19
+  xpos -31
+  ypos 288
+ }
+push $Nb5c83dc0
+ Camera2 {
+  rotate {0 -90 0}
+  focal 45
+  haperture 90
+  vaperture 90
+  name Camera2
+  label "rotate = \[value rotate]"
+  xpos 228
+  ypos -3
+ }
+push $Nb5c3eca0
+ SphericalTransform {
+  input "Lat Long map"
+  ry -90
+  output Cube
+  format {{{Reformat1.format}}}
+  fix true
+  name SphericalTransform2
+  xpos 74
+  ypos 12
+ }
+ Dot {
+  name Dot10
+  xpos 108
+  ypos 125
+ }
+ Project3D2 {
+  inputs 2
+  name Project3D2
+  xpos 218
+  ypos 122
+ }
+ MergeMat {
+  inputs 2
+  name MergeMat1
+  xpos 218
+  ypos 285
+ }
+ MergeMat {
+  inputs 2
+  name MergeMat2
+  xpos 494
+  ypos 285
+ }
+ MergeMat {
+  inputs 2
+  name MergeMat3
+  xpos 757
+  ypos 285
+ }
+ MergeMat {
+  inputs 2
+  name MergeMat4
+  xpos 1040
+  ypos 285
+ }
+ MergeMat {
+  inputs 2
+  name MergeMat5
+  xpos 1305
+  ypos 285
+ }
+ Input {
+  inputs 0
+  name geo
+  xpos 1557
+  ypos -418
+  number 2
+ }
+ ApplyMaterial {
+  inputs 2
+  name ApplyMaterial1
+  xpos 1557
+  ypos 285
+ }
+ Output {
+  name Output1
+  xpos 1557
+  ypos 492
+ }
+end_group
