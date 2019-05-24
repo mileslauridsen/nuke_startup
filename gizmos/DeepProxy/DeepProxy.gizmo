@@ -16,7 +16,7 @@ Group {
  addUserKnob {6 render +STARTLINE}
  addUserKnob {26 ""}
  addUserKnob {41 depth_channel l "Depth Channel" T Copy1.from0}
- addUserKnob {6 nuke_depth l "nuke depth" t "If this is not Scanline render depth, we invert with 1/z." +STARTLINE}
+ addUserKnob {6 nuke_depth l "nuke depth" t "If this is not ScanlineRender depth, we invert with 1/z." +STARTLINE}
  nuke_depth true
  addUserKnob {6 unpremult_depth l "unpremult depth" +STARTLINE}
 }
