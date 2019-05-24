@@ -1,0 +1,110 @@
+set cut_paste_input [stack 0]
+version 11.3 v2
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name DeepProxy
+ tile_color 0x66ff
+ selected true
+ xpos 188
+ ypos -133
+ addUserKnob {20 DeepProxy}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup')" +STARTLINE}
+ addUserKnob {26 "" +STARTLINE}
+ addUserKnob {6 gui +STARTLINE}
+ addUserKnob {6 render +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 depth_channel l "Depth Channel" T Copy1.from0}
+ addUserKnob {6 nuke_depth l "nuke depth" t "If this is not Scanline render depth, we invert with 1/z." +STARTLINE}
+ nuke_depth true
+ addUserKnob {6 unpremult_depth l "unpremult depth" +STARTLINE}
+}
+ Input {
+  inputs 0
+  name aovs
+  xpos -317
+  ypos -314
+ }
+ Dot {
+  name COLOR_dot
+  label COLOR
+  xpos -283
+  ypos -238
+ }
+set N6ec2f1b0 [stack 0]
+ Dot {
+  name Dot1
+  xpos -283
+  ypos 305
+ }
+ Input {
+  inputs 0
+  name deep
+  xpos 58
+  ypos -311
+  number 1
+ }
+ Dot {
+  name Dot2
+  xpos 92
+  ypos 155
+ }
+push $N6ec2f1b0
+ Dot {
+  name DEPTH_dot
+  label DEPTH
+  xpos -96
+  ypos -238
+ }
+ Unpremult {
+  channels all
+  name Unpremult1
+  xpos -130
+  ypos -81
+  disable {{!unpremult_depth}}
+ }
+set N6ea577a0 [stack 0]
+push $N6ea577a0
+ Copy {
+  inputs 2
+  from0 depth.Z
+  to0 depth.Z
+  bbox A
+  name Copy1
+  xpos -130
+  ypos -49
+ }
+ Expression {
+  channel3 depth
+  expr3 "a !=0 ? 1/z : 0"
+  name Expression1
+  xpos -130
+  ypos -17
+  disable {{nuke_depth}}
+ }
+ DeepFromImage {
+  name DeepFromImage1
+  xpos -130
+  ypos 7
+ }
+ Switch {
+  inputs 2
+  which {{"\$gui ? parent.gui ? 0 : 1 : parent.render ? 0 : 1"}}
+  name Switch1
+  selected true
+  xpos -130
+  ypos 152
+ }
+ DeepRecolor {
+  inputs 2
+  name DeepRecolor1
+  xpos -130
+  ypos 302
+ }
+ Output {
+  name Output1
+  xpos -130
+  ypos 466
+ }
+end_group
