@@ -12,13 +12,14 @@ Group {
  addUserKnob {20 DeepProxy}
  addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup')" +STARTLINE}
  addUserKnob {26 "" +STARTLINE}
- addUserKnob {6 gui +STARTLINE}
- addUserKnob {6 render +STARTLINE}
+ addUserKnob {6 gui_proxy t "Use depth instead of deep in gui" +STARTLINE}
+ addUserKnob {6 render_proxy t "Use depth instead of deep in render" +STARTLINE}
  addUserKnob {26 ""}
  addUserKnob {41 depth_channel l "Depth Channel" T Copy1.from0}
  addUserKnob {6 nuke_depth l "nuke depth" t "If this is not ScanlineRender depth, we invert with 1/z." +STARTLINE}
- nuke_depth true
  addUserKnob {6 unpremult_depth l "unpremult depth" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {6 target_alpha l "target input alpha" t "Toggle target input alpha on DeepRecolor." +STARTLINE}
 }
  Input {
   inputs 0
@@ -90,7 +91,7 @@ push $N6ea577a0
  }
  Switch {
   inputs 2
-  which {{"\$gui ? parent.gui ? 0 : 1 : parent.render ? 0 : 1"}}
+  which {{"\$gui ? parent.gui_proxy ? 0 : 1 : parent.render_proxy ? 0 : 1"}}
   name Switch1
   selected true
   xpos -130
@@ -99,6 +100,7 @@ push $N6ea577a0
  DeepRecolor {
   inputs 2
   name DeepRecolor1
+  targetInputAlpha {{target_alpha}}
   xpos -130
   ypos 302
  }
