@@ -1,0 +1,23 @@
+NoOp {
+name CameraCalculator
+selected true
+xpos -2240
+ypos 540
+addUserKnob {20 FocalFOV l "Calculate this!"}
+addUserKnob {26 divin l Inputs}
+addUserKnob {26 "" +STARTLINE}
+addUserKnob {7 focal l "Focal Length" R 0 180}
+focal 35
+addUserKnob {7 fov2 l "Field of View" R 0 360}
+fov2 90
+addUserKnob {7 hap l "Horiz Ap" R 0 36}
+hap 23.75
+addUserKnob {26 "" +STARTLINE}
+addUserKnob {26 divout l Outputs}
+addUserKnob {7 fov l "Resulting FOV"}
+fov {{"2 * atan(hap / (2 * focal)) * 180 / pi"}}
+addUserKnob {7 focal2 l "Resulting Focal Length" R 0 180}
+focal2 {{"(hap / (2 * tan(pi * fov2 / 360)))"}}
+addUserKnob {7 diag l INVISIBLE +INVISIBLE}
+diag {{sqrt(hap*hap+vap*vap-2*hap*vap*cos(90))}}
+}

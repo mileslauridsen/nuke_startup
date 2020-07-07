@@ -1,0 +1,15 @@
+NoOp {
+name HyperfocalCalc
+selected true
+xpos 120
+ypos 41
+addUserKnob {20 Hyperfocal}
+addUserKnob {3 zeiss_number}
+zeiss_number 1500
+addUserKnob {7 diagonal}
+diagonal {{"hypot(\[value \[topnode].haperture], \[value \[topnode].vaperture])"}}
+addUserKnob {7 coc}
+coc {{diagonal/zeiss_number}}
+addUserKnob {7 hyperfocal}
+hyperfocal {{"(pow2(\[value \[topnode].focal])/(\[value \[topnode].fstop] * coc))/100"}}
+}

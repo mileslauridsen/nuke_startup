@@ -201,4 +201,11 @@ milesMenu.addCommand('Copy Read File Path', 'copyReadFilePath()')
 milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
 milesMenu.addCommand('Multi Paste', 'multiPaste()', 'ctrl+shift+v')
 
+## Load nuke_startup gizmos
+giz_path = './gizmos'
+gizmo_dirs = os.listdir(giz_path)
+
+for g in gizmo_dirs:
+    nuke.menu( 'Nodes' ).addCommand( 'nuke_startup/%s' % g, "nuke.createNode('%s')" % g )
+
 ### END MENU SETUP ###
