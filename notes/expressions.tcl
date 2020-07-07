@@ -63,3 +63,6 @@ abs(rint(TimeWarp1.lookup)-TimeWarp1.lookup) > 0.15 ? 1:0
 # Using TCL lindex and split to get a specific portion of a file path
 # In this case we split the directory separator "/" and choose the 3rd item in the resulting list
 [ lindex [split [value [topnode].file] / ] 3 ]
+
+# normalize
+(a - aMin)/(aMax - aMin)
