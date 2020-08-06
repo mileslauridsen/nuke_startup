@@ -1,0 +1,12 @@
+Camera2 {
+ focal {{"(haperture / (2 * tan(pi * FOV_1 / 360)))"}}
+ vaperture 24.576
+ name FOVCam
+ label "<b>FOV: \[value FOV_1]\nfocal: \[value focal]\ny_rot: \[value rotate.y]"
+ selected true
+ xpos 126
+ ypos -44
+ addUserKnob {20 FOV}
+ addUserKnob {7 FOV_1 l FOV R 0 180}
+ FOV_1 120
+}

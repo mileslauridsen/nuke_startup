@@ -1,0 +1,10 @@
+set cut_paste_input [stack 0]
+version 12.1 v3
+push $cut_paste_input
+BlendMat {
+ surfaceblend modulate
+ name ParticleBlendMat
+ selected true
+ xpos 325
+ ypos -22
+}

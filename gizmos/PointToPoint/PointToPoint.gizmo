@@ -1,0 +1,102 @@
+Group {
+ inputs 2
+ name PointToPoint
+ selected true
+ xpos -83
+ ypos 37
+ addUserKnob {20 PointToPoint_main_tab l PointToPoint}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup')" +STARTLINE}
+ addUserKnob {26 ""}
+ addUserKnob {41 point_multiplier T point_CTRL.point_multiplier}
+ addUserKnob {4 output_type M {Camera Axis}}
+ addUserKnob {20 output_cam_tab}
+ addUserKnob {26 Transform}
+ addUserKnob {41 translate T point_output_cam.translate}
+ addUserKnob {41 rotate T point_output_cam.rotate}
+ addUserKnob {26 ""}
+ addUserKnob {26 Projection -STARTLINE T ""}
+ addUserKnob {41 focal l "focal length" T point_output_cam.focal}
+ addUserKnob {41 haperture l "horiz aperture" T point_output_cam.haperture}
+ addUserKnob {41 vaperture l "vert aperture" T point_output_cam.vaperture}
+ addUserKnob {41 near T point_output_cam.near}
+ addUserKnob {41 far T point_output_cam.far}
+ addUserKnob {41 win_translate l "window translate" T point_output_cam.win_translate}
+ addUserKnob {41 win_scale l "window scale" T point_output_cam.win_scale}
+ addUserKnob {41 winroll l "window roll" T point_output_cam.winroll}
+ addUserKnob {41 focal_point l "focal distance" T point_output_cam.focal_point}
+ addUserKnob {41 fstop T point_output_cam.fstop}
+ addUserKnob {20 output_axis_tab}
+ addUserKnob {41 translate_1 l translate T Axis1.translate}
+ addUserKnob {41 rotate_1 l rotate T Axis1.rotate}
+}
+ Input {
+  inputs 0
+  name point1
+  xpos -137
+  ypos -143
+ }
+ Dot {
+  name Dot2
+  xpos -103
+  ypos -46
+ }
+ Input {
+  inputs 0
+  name point2
+  xpos -310
+  ypos -143
+  number 1
+ }
+ Dot {
+  name Dot1
+  xpos -276
+  ypos -41
+ }
+ NoOp {
+  inputs 0
+  name point_CTRL
+  xpos 55
+  ypos -143
+  addUserKnob {20 User}
+  addUserKnob {7 point_multiplier}
+ }
+ Axis2 {
+  inputs 0
+  translate {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.x] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.x])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.y] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.y])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.z] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.z])"}}
+  rotate {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent].rotate.x] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent].rotate.x])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent].rotate.y] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent].rotate.y])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent].rotate.z] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent].rotate.z])"}}
+  name Axis1
+  selected true
+  xpos 173
+  ypos -23
+ }
+ Camera2 {
+  inputs 0
+  translate {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.x] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.x])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.y] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.y])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].translate.z] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].translate.z])"}}
+  rotate {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].rotate.x] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].rotate.x])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].rotate.y] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].rotate.y])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].rotate.z] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].rotate.z])"}}
+  focal {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].focal] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].focal])"}}
+  haperture {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].haperture] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].haperture])"}}
+  vaperture {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].vaperture] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].vaperture])"}}
+  near {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].near] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].near])"}}
+  far {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].far] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].far])"}}
+  win_translate {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].win_translate.u] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].win_translate.u])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].win_translate.v] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].win_translate.v])"}}
+  win_scale {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].win_scale.u] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].win_scale.u])"} {"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].win_scale.v] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].win_scale.v])"}}
+  winroll {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].winroll] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].winroll])"}}
+  focal_point {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].focal_point] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].focal_point])"}}
+  fstop {{"((1 - point_CTRL.point_multiplier) * \[value \[topnode Dot1.parent.input0].fstop] ) + (point_CTRL.point_multiplier * \[value \[topnode Dot2.parent.input1].fstop])"}}
+  name point_output_cam
+  xpos 63
+  ypos -23
+ }
+ Switch {
+  inputs 2
+  which {{parent.output_type}}
+  name Switch1
+  xpos 53
+  ypos 99
+ }
+ Output {
+  name Output1
+  xpos 53
+  ypos 165
+ }
+end_group
