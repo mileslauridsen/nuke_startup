@@ -1,0 +1,920 @@
+Group {
+ inputs 0
+ name ColorPalette
+ tile_color 0x2d2d2dff
+ note_font_color 0x7f7f7fff
+ selected true
+ xpos 2477
+ ypos 223
+ addUserKnob {20 User}
+ addUserKnob {4 color_schemes_pulldown l "Color Schemes" M {Analogous "Analogous Spectrum" Complementary "Split Complementary" Triadic Square Rectangular Shades "" ""}}
+ addUserKnob {7 saturation_multiplier l "Saturation Multiplier"}
+ saturation_multiplier 0.5
+ addUserKnob {22 update_colors_button l Update T "import colorpalette_nuke\nreload(colorpalette_nuke)\n\ncolorpalette_nuke.update_groups()" +STARTLINE}
+ addUserKnob {6 show_labels_checkbox l "Show Labels" +STARTLINE}
+ show_labels_checkbox true
+ addUserKnob {26 ""}
+ addUserKnob {20 color_group_01 n 1}
+ color_group_01 0
+ addUserKnob {6 color_group_01_lock l "Group 01 Lock" +STARTLINE}
+ color_group_01_lock true
+ addUserKnob {41 color01 T Constant1.color}
+ addUserKnob {41 color02 T Constant2.color}
+ addUserKnob {41 color03 T Constant3.color}
+ addUserKnob {41 color04 T Constant4.color}
+ addUserKnob {41 color05 T Constant5.color}
+ addUserKnob {20 endGroup_1 l endGroup n -1}
+ addUserKnob {20 color_group_02 n 1}
+ color_group_02 0
+ addUserKnob {6 color_group_02_lock l "Group 02 Lock" +STARTLINE}
+ color_group_02_lock true
+ addUserKnob {41 color06 T Constant6.color}
+ addUserKnob {41 color07 T Constant7.color}
+ addUserKnob {41 color08 T Constant8.color}
+ addUserKnob {41 color09 T Constant9.color}
+ addUserKnob {41 color10 T Constant10.color}
+ addUserKnob {20 endGroup_2 l endGroup n -1}
+ addUserKnob {20 color_group_03 n 1}
+ color_group_03 0
+ addUserKnob {6 color_group_03_lock l "Group 03 Lock" +STARTLINE}
+ color_group_03_lock true
+ addUserKnob {41 color11 T Constant11.color}
+ addUserKnob {41 color12 T Constant12.color}
+ addUserKnob {41 color13 T Constant13.color}
+ addUserKnob {41 color14 T Constant14.color}
+ addUserKnob {41 color15 T Constant15.color}
+ addUserKnob {20 endGroup_3 l endGroup n -1}
+ addUserKnob {20 color_group_04 n 1}
+ color_group_04 0
+ addUserKnob {6 color_group_04_lock l "Group 04 Lock" +STARTLINE}
+ color_group_04_lock true
+ addUserKnob {41 color16 T Constant16.color}
+ addUserKnob {41 color17 T Constant17.color}
+ addUserKnob {41 color18 T Constant18.color}
+ addUserKnob {41 color19 T Constant19.color}
+ addUserKnob {41 color20 T Constant20.color}
+ addUserKnob {20 endGroup_4 l endGroup n -1}
+}
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.05 0.05 0.05 1}
+  name Constant20
+  note_font Verdana
+  xpos 267
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color20
+  old_message {{99 111 108 111 114 50 48}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 0 250 1 250 2 250 3 250 4 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text1
+  xpos 267
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.1 0.1 0.1 1}
+  name Constant19
+  note_font Verdana
+  xpos 167
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color19
+  old_message {{99 111 108 111 114 49 57}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 0 250 1 250 2 250 3 250 4 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text20
+  xpos 167
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.15 0.15 0.15 1}
+  name Constant18
+  note_font Verdana
+  xpos 67
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color18
+  old_message {{99 111 108 111 114 49 56}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text17
+  xpos 67
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.2 0.2 0.2 1}
+  name Constant17
+  note_font Verdana
+  xpos -33
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color17
+  old_message {{99 111 108 111 114 49 55}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text16
+  xpos -33
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.25 0.25 0.25 1}
+  name Constant16
+  note_font Verdana
+  xpos -133
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color16
+  old_message {{99 111 108 111 114 49 54}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text15
+  xpos -133
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.5 0.4757598395 0.3142153322 1}
+  name Constant15
+  note_font Verdana
+  xpos -233
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color15
+  old_message {{99 111 108 111 114 49 53}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text14
+  xpos -233
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.4683284528 0.3142153322 0.5 1}
+  name Constant14
+  note_font Verdana
+  xpos -333
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color14
+  old_message {{99 111 108 111 114 49 52}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text13
+  xpos -333
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.5 0.4515196789 0.1284306645 1}
+  name Constant13
+  note_font Verdana
+  xpos -433
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color13
+  old_message {{99 111 108 111 114 49 51}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text12
+  xpos -433
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.4366569055 0.1284306645 0.5 1}
+  name Constant12
+  note_font Verdana
+  xpos -533
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color12
+  old_message {{99 111 108 111 114 49 50}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text11
+  xpos -533
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.1284306645 0.5 0.4440882922 1}
+  name Constant11
+  note_font Verdana
+  xpos -633
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color11
+  old_message {{99 111 108 111 114 49 49}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text10
+  xpos -633
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.05 0.007817551494 0.01696808636 1}
+  name Constant10
+  note_font Verdana
+  xpos -733
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color10
+  old_message {{99 111 108 111 114 49 48}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text9
+  xpos -733
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.1 0.01563510299 0.03393617272 1}
+  name Constant9
+  note_font Verdana
+  xpos -833
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color09
+  old_message {{99 111 108 111 114 48 57}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text8
+  xpos -833
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.15 0.02345265448 0.05090425909 1}
+  name Constant8
+  note_font Verdana
+  xpos -933
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color08
+  old_message {{99 111 108 111 114 48 56}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text7
+  xpos -933
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.2 0.03127020598 0.06787234545 1}
+  name Constant7
+  note_font Verdana
+  xpos -1033
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color07
+  old_message {{99 111 108 111 114 48 55}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text6
+  xpos -1033
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.25 0.03908775747 0.08484043181 1}
+  name Constant6
+  note_font Verdana
+  xpos -1133
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color06
+  old_message {{99 111 108 111 114 48 54}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text5
+  xpos -1133
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.08387654275 0.4999999702 0.4698704269 1}
+  name Constant5
+  note_font Verdana
+  xpos -1233
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color05
+  old_message {{99 111 108 111 114 48 53}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text4
+  xpos -1233
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.08387654275 0.3221510244 0.4999999702 1}
+  name Constant4
+  note_font Verdana
+  xpos -1333
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color04
+  old_message {{99 111 108 111 114 48 52}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text3
+  xpos -1333
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.08387654275 0.1141725354 0.4999999702 1}
+  name Constant3
+  note_font Verdana
+  xpos -1433
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color03
+  old_message {{99 111 108 111 114 48 51}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text2
+  xpos -1433
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.2615590391 0.08387654275 0.4999999702 1}
+  name Constant2
+  note_font Verdana
+  xpos -1533
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color02
+  old_message {{99 111 108 111 114 48 50}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text19
+  xpos -1533
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ Constant {
+  inputs 0
+  channels rgb
+  color {0.4695375282 0.08387654275 0.4999999702 1}
+  name Constant1
+  note_font Verdana
+  xpos -1633
+  ypos -175
+ }
+ Text2 {
+  font_size_toolbar 300
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message color01
+  old_message {{99 111 108 111 114 48 49}
+    }
+  box {0 0 2048 1156}
+  xjustify center
+  yjustify bottom
+  transforms {{0 2}
+    }
+  font_size_values {{0 300 1 300 2 300 3 300 4 300 5 300 6 300 0 100 1 100 2 100 3 100 4 100 5 100 6 100}
+    }
+  font_width_values {{0 100 1 100 2 100 3 100 4 100 5 100 6 100 0 250 1 250 2 250 3 250 4 250 5 250 6 250}
+    }
+  cursor_position 7
+  font {{ Arial : Regular : Supplemental/Arial.ttf : 0 }}
+  font_size 300
+  center {1024 578}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {{0 1156}
+    }
+  group_animations {{0} imported: 0 selected: items: "root transform/"}
+  animation_layers {{1 11 1024 578 0 0 1 1 0 0 0 0}
+    }
+  enable_background true
+  name Text18
+  xpos -1633
+  ypos -103
+  disable {{"parent.show_labels_checkbox == True ? 0 : 1"}}
+ }
+ ContactSheet {
+  inputs 20
+  width 2048
+  height 1156
+  rows 4
+  columns 5
+  center true
+  roworder TopBottom
+  name ContactSheet1
+  xpos 267
+  ypos 26
+ }
+ NoOp {
+  name NoOp1
+  selected true
+  xpos 267
+  ypos 63
+ }
+ Output {
+  name Output1
+  xpos 267
+  ypos 126
+ }
+end_group
