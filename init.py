@@ -1,4 +1,5 @@
 import os
+import nuke
 
 giz_path = './gizmos'
 gizmo_dirs = os.listdir(giz_path)

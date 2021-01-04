@@ -1,12 +1,14 @@
+set cut_paste_input [stack 0]
+version 12.1 v3
 Group {
  inputs 0
  name ColorPalette
  tile_color 0x2d2d2dff
  note_font_color 0x7f7f7fff
  selected true
- xpos 2477
- ypos 223
- addUserKnob {20 User}
+ xpos -20
+ ypos -114
+ addUserKnob {20 ColorPaletteCTRL}
  addUserKnob {4 color_schemes_pulldown l "Color Schemes" M {Analogous "Analogous Spectrum" Complementary "Split Complementary" Triadic Square Rectangular Shades "" ""}}
  addUserKnob {7 saturation_multiplier l "Saturation Multiplier"}
  saturation_multiplier 0.5
