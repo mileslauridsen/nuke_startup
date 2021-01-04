@@ -44,6 +44,17 @@ def randrange(rand_low, rand_high):
     return randrange
 
 
+def random_rgb():
+    """
+    Random rgb color tuple
+    :return: tuple of 3 floats
+    """
+    r = float(randrange(0, 255))/255.0
+    g = float(randrange(0, 255))/255.0
+    b = float(randrange(0, 255))/255.0
+    return (r,g,b)
+
+
 def hue_shift(hue, percent, direction):
     """
     Given a hue, percent, and direction, shift the color wheel
