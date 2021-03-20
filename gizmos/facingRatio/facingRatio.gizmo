@@ -10,12 +10,11 @@ Group {
  xpos -64
  ypos 144
  addUserKnob {20 FacingRatio}
+ addUserKnob {22 documentation l Documentation T "import webbrowser\nwebbrowser.open('https://github.com/mileslauridsen/nuke_startup', new=2)" +STARTLINE}
  addUserKnob {41 in l normals_channel T Shuffle1.in}
  addUserKnob {41 white l gain T Grade1.white}
  addUserKnob {41 gamma T Grade1.gamma}
  addUserKnob {41 disable_1 l invert T Invert1.disable}
- addUserKnob {26 "" +STARTLINE}
- addUserKnob {26 dev l "" +STARTLINE T "by mileslauridsen@gmail.com"}
 }
  Input {
   inputs 0
