@@ -1,8 +1,3 @@
-set cut_paste_input [stack 0]
-version 11.3 v2
-push 0
-push 0
-push $cut_paste_input
 Group {
  inputs 3
  name CubeCam
