@@ -28,10 +28,12 @@ def viewer_pipes():
             else:
                  i.knob("hide_input").setValue(True)
 
+
 def guiOn():
     '''Set expression on selected node to disable in GUI'''
     n = nuke.thisNode()
     n['disable'].setExpression("$gui ? 0:1")
+
 
 def viewer_pipes():
     '''Hide input into Viewer nodes'''
@@ -43,6 +45,7 @@ def viewer_pipes():
                 i.knob("hide_input").setValue(False)
             else:
                  i.knob("hide_input").setValue(True)
+
 
 def guiSamples(gui=1, samples=16):
     '''Set selected scanline render samples to selected values'''
@@ -57,7 +60,8 @@ def guiCheck():
             if n[knob].hasExpression():
                 origExpression = n[knob].toScript()
                 if "$gui" in origExpression:
-                    print n.name(), knob
+                    print(n.name(), knob)
+
 
 def readFromWrite():
     '''Create Read node with values from Write node'''
@@ -71,6 +75,7 @@ def readFromWrite():
         read = nuke.nodes.Read(file=file, proxy=proxy, first=first, last=last)
         read.setXYpos( n.xpos(), n.ypos() + 100 )
 
+
 def copyReadFilePath():
     '''Copy paths in file knobs to clipboard'''
     files = []
@@ -79,9 +84,11 @@ def copyReadFilePath():
             files.append( n["file"].getValue() + ", " + str(int(n["first"].getValue())) + "-" + str(int(n["last"].getValue())))
     clip = QtGui.QClipboard().setText("\n".join(files))
 
+
 def copyNukeFilePath():
     nkfile = nuke.root().name()
     QtGui.QClipboard().setText(nkfile)
+
 
 def multiPaste():
     '''Copy contents of clipboard to every selected node.'''
@@ -90,6 +97,7 @@ def multiPaste():
         n['selected'].setValue(True)
         nuke.nodePaste('%clipboard%')
         n['selected'].setValue(False)
+
 
 def curveToolMin(mathtype="min"):
     '''Provide math functions on the curve of measured min values in CurveTool node.'''
@@ -118,6 +126,7 @@ def curveToolMin(mathtype="min"):
 
                 return (redMinAvg, greenMinAvg, blueMinAvg)
 
+
 def curveToolMax(mathtype="max"):
     '''Provide math functions on the curve of measured max values in CurveTool node.'''
     for n in nuke.selectedNodes():
@@ -144,6 +153,7 @@ def curveToolMax(mathtype="max"):
                 blueMaxAvg = sum(blueList)/len(blueList)
 
                 return (redMaxAvg, greenMaxAvg, blueMaxAvg)
+
 
 def rayRenderChannels():
     nuke.Layer( '__Pworld', ['x', 'y', 'z'] )
