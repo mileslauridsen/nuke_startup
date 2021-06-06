@@ -21,7 +21,7 @@ def color_scheme_set(scheme, rgb, sat_mult):
     elif scheme == "Shades":
         colors = colorpalette.shades(rgb, dark=0.05)
     else:
-        print "Color Scheme Not Available"
+        print("Color Scheme Not Available")
     return colors
 
 
