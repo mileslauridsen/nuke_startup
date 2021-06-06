@@ -12,7 +12,7 @@ Group {
  addUserKnob {4 color_schemes_pulldown l "Color Schemes" M {Analogous "Analogous Spectrum" Complementary "Split Complementary" Triadic Square Rectangular Shades "" ""}}
  addUserKnob {7 saturation_multiplier l "Saturation Multiplier"}
  saturation_multiplier 0.5
- addUserKnob {22 update_colors_button l Update T "import colorpalette_nuke\nreload(colorpalette_nuke)\n\ncolorpalette_nuke.update_groups()" +STARTLINE}
+ addUserKnob {22 update_colors_button l Update T "import colorpalette_nuke\nimport importlib\nimportlib.reload(colorpalette_nuke)\n\ncolorpalette_nuke.update_groups()" +STARTLINE}
  addUserKnob {6 show_labels_checkbox l "Show Labels" +STARTLINE}
  show_labels_checkbox true
  addUserKnob {26 ""}
