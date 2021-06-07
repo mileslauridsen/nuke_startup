@@ -1,221 +1,251 @@
-'''
+"""
 menu.py for use with The Foundry's Nuke compositing software
-'''
+"""
 
-### BEGIN IMPORTS ###
-# built-in
+# BEGIN IMPORTS
+# built-ins
 import os
+import glob
 import nuke
+import nukescripts
 
 # pyside qtgui (QClipboard)
-try:
-    from PySide import QtGui
-except:
-    from PySide2 import QtGui
+from PySide2 import QtGui
 
-### END IMPORTS ###
+# END IMPORTS
 
 
-### BEGIN DEFINTIONS ###
+# BEGIN DEFINTIONS
 def viewer_pipes():
-    '''Turn off all viewer pipes'''
-    n = nuke.allNodes()
+    """
+    Turn off all viewer pipes
+    :return: None
+    """
+    nodes = nuke.allNodes()
 
-    for i in n:
+    for i in nodes:
         if i.Class() == "Viewer":
-            if i.knob("hide_input").getValue == True:
+            if i.knob("hide_input").getValue():
                 i.knob("hide_input").setValue(False)
             else:
-                 i.knob("hide_input").setValue(True)
+                i.knob("hide_input").setValue(True)
 
 
-def guiOn():
-    '''Set expression on selected node to disable in GUI'''
-    n = nuke.thisNode()
-    n['disable'].setExpression("$gui ? 0:1")
+def gui_on():
+    """
+    Set expression on selected node to disable in GUI
+    :return: None
+    """
+    node = nuke.thisNode()
+    node['disable'].setExpression("$gui ? 0:1")
 
 
-def viewer_pipes():
-    '''Hide input into Viewer nodes'''
-    n = nuke.allNodes()
-
-    for i in n:
-        if i.Class() == "Viewer":
-            if i.knob("hide_input").getValue == True:
-                i.knob("hide_input").setValue(False)
-            else:
-                 i.knob("hide_input").setValue(True)
-
-
-def guiSamples(gui=1, samples=16):
-    '''Set selected scanline render samples to selected values'''
-    for n in nuke.selectedNodes():
-        if n.Class() == "ScanlineRender":
-            n["samples"].setExpression("$gui ? " + gui + " : " + str(samples))
-
-def guiCheck():
-    '''Check all Nodes for any $gui expressions'''
-    for n in nuke.allNodes(recurseGroups=True):
-        for knob in n.knobs():
-            if n[knob].hasExpression():
-                origExpression = n[knob].toScript()
-                if "$gui" in origExpression:
-                    print(n.name(), knob)
+def gui_samples(gui=1, render=16):
+    """
+    Set selected scanline render samples to selected values
+    :param gui: integer, value to use for samples in gui mode
+    :param render: integer, value to use for samples in render mode
+    :return: None
+    """
+    for node in nuke.selectedNodes():
+        if node.Class() == "ScanlineRender":
+            node["samples"].setExpression("$gui ? {} : {}".format(gui, render))
 
 
-def readFromWrite():
-    '''Create Read node with values from Write node'''
-    for n in nuke.selectedNodes():
-        file = n['file'].getValue()
-        proxy = n['proxy'].getValue()
+def gui_check():
+    """
+    Check all Nodes for any $gui expressions
+    :return: None
+    """
+    for node in nuke.allNodes(recurseGroups=True):
+        for knob in node.knobs():
+            if node[knob].hasExpression():
+                orig_expression = node[knob].toScript()
+                if "$gui" in orig_expression:
+                    print(node.name(), knob)
+
+
+def read_from_write():
+    """
+    Create Read node with values from Write node
+    :return: None
+    """
+    for node in nuke.selectedNodes():
+        file = node['file'].getValue()
+        proxy = node['proxy'].getValue()
         file_seq = glob.glob(file.replace("%04d", "*"))
         file_seq.sort()
         first = file_seq[0].split('.')[1]
         last = file_seq[-1].split('.')[1]
         read = nuke.nodes.Read(file=file, proxy=proxy, first=first, last=last)
-        read.setXYpos( n.xpos(), n.ypos() + 100 )
+        read.setXYpos(node.xpos(), node.ypos() + 100)
 
 
-def copyReadFilePath():
-    '''Copy paths in file knobs to clipboard'''
+def copy_read_file_path():
+    """
+    Copy paths in file knobs to clipboard
+    :return: None
+    """
     files = []
-    for n in nuke.selectedNodes():
-        if n.Class() == "Read":
-            files.append( n["file"].getValue() + ", " + str(int(n["first"].getValue())) + "-" + str(int(n["last"].getValue())))
-    clip = QtGui.QClipboard().setText("\n".join(files))
+    for node in nuke.selectedNodes():
+        if node.Class() == "Read":
+            files.append("{}, {}-{}".format(node['file'].getValue(),
+                                            int(node['first'].getValue()),
+                                            int(node['last'].getValue())))
+    QtGui.QClipboard().setText("\n".join(files))
 
 
-def copyNukeFilePath():
+def copy_nuke_file_path():
+    """
+    Copy nuke script path to clipboard
+    :return: None
+    """
     nkfile = nuke.root().name()
     QtGui.QClipboard().setText(nkfile)
 
 
-def multiPaste():
-    '''Copy contents of clipboard to every selected node.'''
-    for n in nuke.selectedNodes():
+def multi_paste():
+    """
+    Copy contents of clipboard to every selected node.
+    :return: None
+    """
+    for node in nuke.selectedNodes():
         nukescripts.misc.clean_selection_recursive()
-        n['selected'].setValue(True)
+        node.setSelected(True)
         nuke.nodePaste('%clipboard%')
-        n['selected'].setValue(False)
+        node.setSelected(False)
 
 
-def curveToolMin(mathtype="min"):
-    '''Provide math functions on the curve of measured min values in CurveTool node.'''
-    for n in nuke.selectedNodes():
-        if n.Class() == "CurveTool":
-            redMin = n['minlumapixvalue'].animations()[0]
-            greenMin = n['minlumapixvalue'].animations()[1]
-            blueMin = n['minlumapixvalue'].animations()[2]
+def curve_tool_min(mathtype="min"):
+    """
+    Provide math functions on the curve of measured min values in CurveTool node.
+    :param mathtype: string, math type to operate on
+    :return: three floats as tuple
+    """
+    for node in nuke.selectedNodes():
+        if node.Class() == "CurveTool":
+            red_min = node['minlumapixvalue'].animations()[0]
+            green_min = node['minlumapixvalue'].animations()[1]
+            blue_min = node['minlumapixvalue'].animations()[2]
 
-            redList = map(lambda key: key.y, redMin.keys())
-            greenList = map(lambda key: key.y, greenMin.keys())
-            blueList = map(lambda key: key.y, blueMin.keys())
+            red_list = map(lambda key: key.y, red_min.keys())
+            green_list = map(lambda key: key.y, green_min.keys())
+            blue_list = map(lambda key: key.y, blue_min.keys())
 
-            if mathtype=="min":
-                redMin = min(redList)
-                greenMin = min(greenList)
-                blueMin = min(blueList)
+            if mathtype is "min":
+                red_min = min(red_list)
+                green_min = min(green_list)
+                blue_min = min(blue_list)
 
-                return (redMin, greenMin, blueMin)
+                return red_min, green_min, blue_min
 
-            elif mathtype=="minavg":
+            elif mathtype is "minavg":
 
-                redMinAvg = sum(redList)/len(redList)
-                greenMinAvg = sum(greenList)/len(greenList)
-                blueMinAvg = sum(blueList)/len(blueList)
+                red_min_avg = sum(red_list)/len(red_list)
+                green_min_avg = sum(green_list)/len(green_list)
+                blue_min_avg = sum(blue_list)/len(blue_list)
 
-                return (redMinAvg, greenMinAvg, blueMinAvg)
-
-
-def curveToolMax(mathtype="max"):
-    '''Provide math functions on the curve of measured max values in CurveTool node.'''
-    for n in nuke.selectedNodes():
-        if n.Class() == "CurveTool":
-            redMax = n['maxlumapixvalue'].animations()[0]
-            greenMax = n['maxlumapixvalue'].animations()[1]
-            blueMax = n['maxlumapixvalue'].animations()[2]
-
-            redList = map(lambda key: key.y, redMax.keys())
-            greenList = map(lambda key: key.y, greenMax.keys())
-            blueList = map(lambda key: key.y, blueMax.keys())
-
-            if mathtype=="max":
-                redMax = max(redList)
-                greenMax = max(greenList)
-                blueMax = max(blueList)
-
-                return (redMax, greenMax, blueMax)
-
-            elif mathtype=="maxavg":
-
-                redMaxAvg = sum(redList)/len(redList)
-                greenMaxAvg = sum(greenList)/len(greenList)
-                blueMaxAvg = sum(blueList)/len(blueList)
-
-                return (redMaxAvg, greenMaxAvg, blueMaxAvg)
+                return red_min_avg, green_min_avg, blue_min_avg
 
 
-def rayRenderChannels():
-    nuke.Layer( '__Pworld', ['x', 'y', 'z'] )
-    nuke.Layer( '__Nworld', ['x', 'y', 'z'] )
-    nuke.Layer( '__motion', ['red', 'green', 'blue'] )
-    nuke.Layer( '__direct_diffuse', ['red', 'green', 'blue'] )
-    nuke.Layer( '__direct_specular', ['red', 'green', 'blue'] )
-    nuke.Layer( '__indirect_specular', ['red', 'green', 'blue'] )
-    nuke.Layer( '__incandescence', ['red', 'green', 'blue'] )
-    n = nuke.thisNode()
-    n['AOV_Point'].setValue('__Pworld')
-    n['AOV_Normal'].setValue('__Nworld')
-    n['AOV_Motion'].setValue('__motion')
-    n['AOV_Direct_Diffuse'].setValue('__direct_diffuse')
-    n['AOV_Direct_Specular'].setValue('__direct_specular')
-    n['AOV_Reflection'].setValue('__indirect_specular')
-    n['AOV_Emissive'].setValue('__incandescence')
+def curve_tool_max(mathtype="max"):
+    """
+    Provide math functions on the curve of measured max values in CurveTool node.
+    :param mathtype: string, mathtype to operate on
+    :return:
+    """
+    for node in nuke.selectedNodes():
+        if node.Class() == "CurveTool":
+            red_max = node['maxlumapixvalue'].animations()[0]
+            green_max = node['maxlumapixvalue'].animations()[1]
+            blue_max = node['maxlumapixvalue'].animations()[2]
 
-### END DEFINITIONS ###
+            red_list = map(lambda key: key.y, red_max.keys())
+            green_list = map(lambda key: key.y, green_max.keys())
+            blue_list = map(lambda key: key.y, blue_max.keys())
+
+            if mathtype is "max":
+                red_max = max(red_list)
+                green_max = max(green_list)
+                blue_max = max(blue_list)
+
+                return red_max, green_max, blue_max
+
+            elif mathtype is "maxavg":
+
+                red_max_avg = sum(red_list)/len(red_list)
+                green_max_avg = sum(green_list)/len(green_list)
+                blue_max_avg = sum(blue_list)/len(blue_list)
+
+                return red_max_avg, green_max_avg, blue_max_avg
 
 
-### BEGIN DEFAULTS SETUP ###
-nuke.addOnUserCreate(lambda:nuke.thisNode()['first_frame'].setValue(nuke.frame()), nodeClass='FrameHold')
+def ray_render_add_channels():
+    """
+    Add utility and beauty aovs to ray render
+    :return: None
+    """
+    nuke.Layer('__Pworld', ['x', 'y', 'z'])
+    nuke.Layer('__Nworld', ['x', 'y', 'z'])
+    nuke.Layer('__motion', ['red', 'green', 'blue'])
+    nuke.Layer('__direct_diffuse', ['red', 'green', 'blue'])
+    nuke.Layer('__direct_specular', ['red', 'green', 'blue'])
+    nuke.Layer('__indirect_specular', ['red', 'green', 'blue'])
+    nuke.Layer('__incandescence', ['red', 'green', 'blue'])
+    node = nuke.thisNode()
+    node['AOV_Point'].setValue('__Pworld')
+    node['AOV_Normal'].setValue('__Nworld')
+    node['AOV_Motion'].setValue('__motion')
+    node['AOV_Direct_Diffuse'].setValue('__direct_diffuse')
+    node['AOV_Direct_Specular'].setValue('__direct_specular')
+    node['AOV_Reflection'].setValue('__indirect_specular')
+    node['AOV_Emissive'].setValue('__incandescence')
+
+# END DEFINITIONS
+
+
+# BEGIN DEFAULTS SETUP
+nuke.addOnUserCreate(lambda:nuke.thisNode()['first_frame'].setValue(nuke.frame()),
+                     nodeClass='FrameHold')
 nuke.knobDefault('ContactSheet.roworder', 'TopBottom')
 nuke.knobDefault('ContactSheet.colorder', 'LeftRight')
 nuke.knobDefault('ContactSheet.center', 'True')
 nuke.knobDefault('Read.label', 'Frames\n[value first] - [value last]')
 nuke.knobDefault('Copy.bbox', 'A')
-nuke.knobDefault('Remove.operation','keep')
-nuke.knobDefault('Remove.channels','rgba')
-nuke.knobDefault('Multiply.channels','rgba')
-nuke.knobDefault('Invert.channels','rgba')
-nuke.knobDefault('Add.channels','rgb')
-nuke.knobDefault('EXPTool.mode', 'Stops' )
-nuke.knobDefault('Blur.label','[value size]')
-nuke.knobDefault('Blur.channels','rgba')
-nuke.knobDefault('Defocus.channels','rgba')
-nuke.knobDefault('Defocus.label','[value defocus]')
-nuke.knobDefault('Keymix.channels','rgba')
-nuke.knobDefault('Dissolve.channels','rgba')
+nuke.knobDefault('Remove.operation', 'keep')
+nuke.knobDefault('Remove.channels', 'rgba')
+nuke.knobDefault('Multiply.channels', 'rgba')
+nuke.knobDefault('Invert.channels', 'rgba')
+nuke.knobDefault('Add.channels', 'rgb')
+nuke.knobDefault('EXPTool.mode', 'Stops')
+nuke.knobDefault('Blur.label', '[value size]')
+nuke.knobDefault('Blur.channels', 'rgba')
+nuke.knobDefault('Defocus.channels', 'rgba')
+nuke.knobDefault('Defocus.label', '[value defocus]')
+nuke.knobDefault('Keymix.channels', 'rgba')
+nuke.knobDefault('Dissolve.channels', 'rgba')
 
-# RAYRENDER
-nuke.knobDefault('RayRender.output_shader_vectors','0')
-nuke.addOnUserCreate(rayRenderChannels, nodeClass="RayRender")
+# rayrender
+nuke.knobDefault('RayRender.output_shader_vectors', '0')
+nuke.addOnUserCreate(ray_render_add_channels, nodeClass="RayRender")
 
-### END DEFAULTS SETUP ###
+# END DEFAULTS SETUP
 
 
-### BEGIN MENU SETUP ###
-## Miles Menu
+# BEGIN MENU SETUP
+# Miles Menu
 milesMenu = nuke.menu('Nuke').addMenu('miles')
 milesMenu.addCommand('Toggle Viewer Pipes', 'viewer_pipes()', 'alt+t')
-milesMenu.addCommand('Read From Write', 'readFromWrite()', 'alt+r')
-milesMenu.addCommand('Copy Read File Path', 'copyReadFilePath()')
-milesMenu.addCommand('Copy Nuke File Path', 'copyNukeFilePath()')
-milesMenu.addCommand('Multi Paste', 'multiPaste()', 'ctrl+shift+v')
+milesMenu.addCommand('Read From Write', 'read_from_write()', 'alt+r')
+milesMenu.addCommand('Copy Read File Path', 'copy_read_file_path()')
+milesMenu.addCommand('Copy Nuke File Path', 'copy_nuke_file_path()')
+milesMenu.addCommand('Multi Paste', 'multi_paste()', 'ctrl+shift+v')
 
-## Load nuke_startup gizmos
-giz_path = './gizmos'
-gizmo_dirs = os.listdir(giz_path)
+# Load nuke_startup gizmos
+GIZMO_PATH = './gizmos'
+gizmo_dirs = os.listdir(GIZMO_PATH)
 
 for g in gizmo_dirs:
-    nuke.menu( 'Nodes' ).addCommand( 'nuke_startup/%s' % g, "nuke.createNode('%s')" % g )
+    nuke.menu('Nodes').addCommand("nuke_startup/{}".format(g), "nuke.createNode('{}')".format(g))
 
-### END MENU SETUP ###
+# END MENU SETUP
