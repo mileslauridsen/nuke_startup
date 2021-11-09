@@ -1,0 +1,81 @@
+// https://iquilezles.org/www/articles/fog/fog.htm
+// vec3 applyFog( in vec3  rgb,      // original color of the pixel
+//              in float distance, // camera to point distance
+//              in vec3  rayOri,   // camera position
+//              in vec3  rayDir )  // camera to point vector
+// {
+//     float fogAmount = (a/b) * exp(-rayOri.y*b) * (1.0-exp( -distance*rayDir.y*b ))/rayDir.y;
+//    vec3  fogColor  = vec3(0.5,0.6,0.7);
+//    return mix( rgb, fogColor, fogAmount );
+// }
+
+
+kernel LightDepthHeightFogKernel : ImageComputationKernel<ePixelWise>
+{
+  Image<eRead, eAccessPoint, eEdgeClamped> src; // the input image
+  Image<eRead, eAccessRandom> depth; // depth input
+  Image<eWrite> dst; // the output image
+
+  param:
+    float4 fogColor01; // fog color 01
+    float4 fogColor02; // fog color 02
+    float density; // fog density
+    float scatter; // fog scatter
+    float3 rayOri; // camera position
+    float3 rayDir; // camera to point vector
+    float3 sunDir; // sun light direction
+    float tintpow; // tint power value
+
+  local:
+    float fogAmount;  // This local variable is not exposed to the user.
+    float lowFix;
+    float highFix;
+    float rayDirFix;
+
+  // In define(), parameters can be given labels and default values.
+  void define() {
+    defineParam(fogColor01, "Fog Color 01", float4(0.25f, 0.5f, 0.75f, 1.0f));
+    defineParam(fogColor02, "Fog Color 02", float4(0.75f, 0.65f, 0.25f, 1.0f));
+    defineParam(density, "Fog Density", 0.2f);
+    defineParam(scatter, "Fog Scatter", 0.02f);
+    defineParam(rayOri, "Camera Position", float3(0.0f, 0.0f, 0.0f));
+    defineParam(rayDir, "Camera Vector", float3(0.0f, 0.0f, 1.0f));
+    defineParam(sunDir, "Sun Vector", float3(1.0f, 0.0f, 0.0f));
+    defineParam(tintpow, "Tint Power", 8.0f);
+
+  }
+
+  // The init() function is run before any calls to process().
+  // Local variables can be initialized here.
+  void init() {
+    lowFix = 0.00001f;
+    highFix = 1000000.0f;
+    rayDirFix = lowFix;
+  }
+
+  void process(int2 pos) {
+    // Read the input image
+    float4 depthHere = depth(pos.x, pos.y, 0);
+
+    // make sure rayDir.y is never 0
+    float rayDirFix = rayDir.y;
+    if (rayDirFix == 0) rayDirFix = lowFix;
+
+    // set per pixel fog amount
+    float fogAmount = (scatter/density) * exp(-rayOri.y * density) * (1.0-exp( -depthHere.x * rayDirFix * density ))/rayDirFix;
+
+    // calculate sun amount
+    float sunAmount = max( dot( rayDir, sunDir ), 0.0f );
+
+    // fog color mixed
+    float4 fogColorMix = fogColor01 * (1.0f-pow(sunAmount, tintpow)) + fogColor02 * pow(sunAmount, tintpow);
+
+    // Mix fox with image
+    float4 mixedFog;
+    mixedFog = src() * (1.0f-fogAmount) + fogColorMix * fogAmount;
+
+    // Write the result to the output image
+    dst() = float4(mixedFog.x, mixedFog.y, mixedFog.z, src().w);
+    // dst() = float4(rayDirFix, rayDirFix, rayDirFix, src().w);
+  }
+};
